@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Death : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Absorb absorb;
+    private void Start()
     {
-        
+        absorb = GetComponentInParent<Absorb>();
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && absorb.mouseRight != 0)
         {
             Destroy(collision.gameObject);
         }
