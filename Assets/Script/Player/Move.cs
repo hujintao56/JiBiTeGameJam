@@ -8,9 +8,7 @@ public class Move : MonoBehaviour
     private bool isGrounded;
     private bool isJumping;
     private float horizontalMovement;
-    private bool dodown;
     private bool is_down;
-    public Vector2 spped;
     private PolygonCollider2D plgcol;
     private void Start()
     {
@@ -30,8 +28,6 @@ public class Move : MonoBehaviour
         {
             rb.velocity = new Vector2(0,-3);
         }
-
-        spped = rb.velocity;
     }
 
     private void FixedUpdate()
