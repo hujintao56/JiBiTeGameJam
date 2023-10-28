@@ -10,6 +10,7 @@ public class FireManager : MonoBehaviour
     {
         foreach (Fire fire in strongFireList)
         {
+            /*
             if (fire.isBurning)
             {
                 foreach (Fire f in strongFireList)
@@ -18,6 +19,8 @@ public class FireManager : MonoBehaviour
                 }
                 return;
             }
+            */
+            Destroy(fire.gameObject);
             return;
         }
     }

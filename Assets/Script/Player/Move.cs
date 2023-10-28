@@ -10,9 +10,11 @@ public class Move : MonoBehaviour
     private float horizontalMovement;
     private bool is_down;
     private PolygonCollider2D plgcol;
+    public Transform weapenObj;
     public int facingDirection = 1;
     private void Start()
     {
+        //weapenObj = transform.Find("weapon");
         rb = GetComponent<Rigidbody2D>();
         plgcol = GetComponentInChildren<PolygonCollider2D>();
     }
@@ -50,10 +52,12 @@ public class Move : MonoBehaviour
         if (horizontalMovement > 0)
         {
             plgcol.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            weapenObj.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (horizontalMovement < 0)
         {
             plgcol.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
+            weapenObj.rotation = Quaternion.Euler(0, -180, 0);
         }
     }
 
@@ -100,6 +104,11 @@ public class Move : MonoBehaviour
         {
             collision.isTrigger = false;
         }
+    }
+
+    public void WindWashself()
+    {
+        rb.velocity = new Vector2(facingDirection * 10, rb.velocity.y);
     }
 
 }
