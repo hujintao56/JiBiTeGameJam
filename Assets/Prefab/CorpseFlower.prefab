@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 73282735195891929}
   m_Layer: 0
   m_Name: CorpseFlower
-  m_TagString: Untagged
+  m_TagString: CorpseFlower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
