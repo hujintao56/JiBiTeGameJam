@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  jumpForce: 10
+  jumpForce: 7
   spped: {x: 0, y: 0}
 --- !u!1 &211572808307738871
 GameObject:
