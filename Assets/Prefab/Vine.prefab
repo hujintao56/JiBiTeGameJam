@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074235042524971496}
   - component: {fileID: 2074235042524971497}
+  - component: {fileID: 2070170618318310471}
   m_Layer: 0
   m_Name: Vine
   m_TagString: Vine
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2070170618318310471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074235042524971494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12829fdf959c95a468a44b0ba703e96c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
