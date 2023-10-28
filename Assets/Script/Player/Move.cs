@@ -10,6 +10,7 @@ public class Move : MonoBehaviour
     private float horizontalMovement;
     private bool is_down;
     private PolygonCollider2D plgcol;
+    public int facingDirection = 1;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,6 +20,14 @@ public class Move : MonoBehaviour
     private void Update()
     {
         horizontalMovement = Input.GetAxis("Horizontal");
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            facingDirection = 1;
+        }
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            facingDirection = -1;
+        }
         if (Input.GetKeyDown(KeyCode.W) && isGrounded )
         {
             isJumping = true;
