@@ -22,7 +22,7 @@ public class Move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGrounded )
         {
             isJumping = true;
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, jumpForce - rb.velocity.y), ForceMode2D.Impulse);
         }
         if (rb.velocity.y == 0 )
         {
