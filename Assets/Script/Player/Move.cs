@@ -11,9 +11,11 @@ public class Move : MonoBehaviour
     private bool dodown;
     private bool is_down;
     public Vector2 spped;
+    private PolygonCollider2D plgcol;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        plgcol = GetComponentInChildren<PolygonCollider2D>();
     }
 
     private void Update()
@@ -40,6 +42,14 @@ public class Move : MonoBehaviour
         {
             isJumping = false;
         }
+        if (horizontalMovement > 0)
+        {
+            plgcol.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (horizontalMovement < 0)
+        {
+            plgcol.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -64,6 +74,7 @@ public class Move : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        isGrounded = true;
         if (Input.GetKeyDown(KeyCode.S) && collision.gameObject.CompareTag("cloud"))
         {
             collision.collider.isTrigger = true;

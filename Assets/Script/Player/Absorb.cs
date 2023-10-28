@@ -1,17 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Absorb : MonoBehaviour
 {
     public float mouseRight ;
-    // Update is called once per frame
+    private Transform target;
+    public float moveSpeed = 1;
+
     void Update()
     {
         mouseRight = Input.GetAxis("Fire2");
-        if (mouseRight!=0)
+        if (target != null)
         {
+            Debug.Log(1);
+            Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
+            Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
 
+            // 使用Vector2.Lerp进行平滑移动
+            // Vector2 newPosition = Vector2.Lerp(currentPosition, targetPosition, moveSpeed * Time.deltaTime);
+            // transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+
+            // 使用Vector2.MoveTowards进行直线移动
+            Vector2 newPosition = Vector2.MoveTowards(targetPosition, currentPosition ,moveSpeed * Time.deltaTime);
+            Debug.Log(newPosition);
+            target.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log(collision.tag);
+        if (mouseRight != 0 && collision.CompareTag("Enemy"))
+        {
+            target = collision.transform;
+        }
+        else
+        {
+            target = null;
+        }
+    }
+
+    
 }
