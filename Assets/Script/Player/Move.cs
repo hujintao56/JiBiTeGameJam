@@ -11,9 +11,11 @@ public class Move : MonoBehaviour
     private bool dodown;
     private bool is_down;
     public Vector2 spped;
+    private PolygonCollider2D plgcol;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        plgcol = GetComponentInChildren<PolygonCollider2D>();
     }
 
     private void Update()
@@ -22,11 +24,11 @@ public class Move : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && isGrounded )
         {
             isJumping = true;
-            rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(0f, jumpForce - rb.velocity.y), ForceMode2D.Impulse);
         }
         if (rb.velocity.y == 0 )
         {
-            rb.velocity = new Vector2(0,-3);
+            rb.velocity = new Vector2(0,- 3);
         }
 
         spped = rb.velocity;
@@ -39,6 +41,14 @@ public class Move : MonoBehaviour
         if (isJumping && rb.velocity.y < 0f)
         {
             isJumping = false;
+        }
+        if (horizontalMovement > 0)
+        {
+            plgcol.gameObject.transform.rotation = Quaternion.Euler(0,0,0);
+        }
+        if (horizontalMovement < 0)
+        {
+            plgcol.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
         }
     }
 
