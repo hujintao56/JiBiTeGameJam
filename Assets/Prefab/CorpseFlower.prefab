@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5952361593465791080}
   - component: {fileID: 73282735195891929}
+  - component: {fileID: 7986599230274694265}
   m_Layer: 0
   m_Name: CorpseFlower
   m_TagString: CorpseFlower
@@ -84,3 +85,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!70 &7986599230274694265
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580950483655914942}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.002091361, y: -4.2583215e-17}
+  m_Size: {x: 0.9957905, y: 0.5}
+  m_Direction: 1
