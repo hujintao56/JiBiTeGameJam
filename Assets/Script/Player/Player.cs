@@ -27,15 +27,17 @@ public class Player : MonoBehaviour
     private FireManager firemng;
     public Camera mainCamera;
     public bool PlayerState = false;
+    private Animator animator;
 
     [SerializeField] private AudioSource deadSoundEffect;
     void Start()
     {
         weapenObj = transform.Find("weapon");
-        CurrentElement = Element.shadow;
+        CurrentElement = Element.nothing;
         move = GetComponentInChildren<Move>();
         firemng = FindObjectOfType<FireManager>();
         bornObj = GameObject.FindGameObjectWithTag("born");
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -43,6 +45,11 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Attack(CurrentElement);
+            animator.SetBool("Attack", true);
+        }
+        else
+        {
+            animator.SetBool("Attack", false);
         }
 
     }
@@ -92,6 +99,7 @@ public class Player : MonoBehaviour
                 {
                     ButtonEnergy -= ReduceEnergy;
                     Rect cameraView = mainCamera.rect;
+                    
 
                     // 将视口范围转换为世界坐标范围
                     Vector2 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(cameraView.xMin, cameraView.yMin, 0));
