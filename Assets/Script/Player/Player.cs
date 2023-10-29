@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     private FireManager firemng;
     public Camera mainCamera;
     public bool PlayerState = false;
+
+    [SerializeField] private AudioSource deadSoundEffect;
     void Start()
     {
         weapenObj = transform.Find("weapon");
@@ -131,8 +133,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("CorpseFlower"))
+        if (collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("CorpseFlower") || collision.gameObject.CompareTag("River"))
         {
+            deadSoundEffect.Play();
             transform.position = bornObj.transform.position;
         }
     }

@@ -13,6 +13,8 @@ public class Move : MonoBehaviour
     public Transform weapenObj;
     public int facingDirection = 1;
     private Collision2D cloudCol;
+    [SerializeField] private AudioSource jumpSoundEffect;
+    [SerializeField] private AudioSource runSoundEffect;
     private void Start()
     {
         //weapenObj = transform.Find("weapon");
@@ -31,8 +33,15 @@ public class Move : MonoBehaviour
         {
             facingDirection = -1;
         }
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+            runSoundEffect.Play();
+        else
+            runSoundEffect.Pause();
+
         if (Input.GetKeyDown(KeyCode.W) && isGrounded )
         {
+            jumpSoundEffect.Play();
             isJumping = true;
             rb.AddForce(new Vector2(0f, jumpForce - rb.velocity.y), ForceMode2D.Impulse);
         }
