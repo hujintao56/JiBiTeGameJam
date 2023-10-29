@@ -18,7 +18,7 @@ public class Absorb : MonoBehaviour
     public Sprite _WaterState;
     public Sprite _WindState;
     public Sprite _ShadowState;
-
+    [SerializeField] private AudioSource absorbSoundEffect;
     private void Start()
     {
         player = GetComponentInParent<Player>();
@@ -49,6 +49,7 @@ public class Absorb : MonoBehaviour
     {
         if (mouseRight != 0 && collision.CompareTag("Enemy"))
         {
+            absorbSoundEffect.Play();
             target = collision.transform;
             OnTri = true;
         }
