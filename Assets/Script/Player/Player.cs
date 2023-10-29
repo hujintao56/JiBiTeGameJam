@@ -19,12 +19,12 @@ public class Player : MonoBehaviour
     public float fireballSpeed = 10f;
     private GameObject bornObj;
     public int _StrongSkillEnegy = 0;
-    public int ReduceEnegy = 0;
+    public int ReduceEnergy = 0;
     [HideInInspector]
-    public int ButtonEnegy { get; set; }
+    public int ButtonEnergy;
     //[HideInInspector]
 
-    public Element CurrentElement { get; set; }
+    public Element CurrentElement;
     private Transform weapenObj;
     private Move move;
     private FireManager firemng;
@@ -54,14 +54,14 @@ public class Player : MonoBehaviour
             case Element.nothing:
                 break;
             case Element.fire:
-                if (ButtonEnegy < _StrongSkillEnegy)
+                if (ButtonEnergy < _StrongSkillEnegy)
                 {
                     weapenObj.gameObject.SetActive(true);
                     Invoke("ShutdownWeapon", 1f);
                 }
                 else
                 {
-                    ButtonEnegy -= ReduceEnegy;
+                    ButtonEnergy -= ReduceEnergy;
                     GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.LookRotation(transform.forward));
 
                     // 设置火球的初始速度和方向
@@ -71,26 +71,26 @@ public class Player : MonoBehaviour
                 }
                 break;
             case Element.water:
-                if (ButtonEnegy < _StrongSkillEnegy)
+                if (ButtonEnergy < _StrongSkillEnegy)
                 {
                     weapenObj.gameObject.SetActive(true);
                     Invoke("ShutdownWeapon", 1f);
                 }
                 else
                 {
-                    ButtonEnegy -= ReduceEnegy;
+                    ButtonEnergy -= ReduceEnergy;
                     firemng.checkAllOut();
                 }
                 break;
             case Element.wind:
-                if (ButtonEnegy < _StrongSkillEnegy)
+                if (ButtonEnergy < _StrongSkillEnegy)
                 {
                     weapenObj.gameObject.SetActive(true);
                     Invoke("ShutdownWeapon", 1f);
                 }
                 else
                 {
-                    ButtonEnegy -= ReduceEnegy;
+                    ButtonEnergy -= ReduceEnergy;
                     Rect cameraView = mainCamera.rect;
 
                     // 将视口范围转换为世界坐标范围
@@ -113,8 +113,8 @@ public class Player : MonoBehaviour
                 }
                 break;
             case Element.shadow:
-                    PlayerState = true;
-                    Invoke("SWPlayerState", 5f);
+                PlayerState = true;
+                Invoke("SWPlayerState", 5f);
                 break;
             default:
                 break;
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spike"))
+        if (collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("CorpseFlower"))
         {
             transform.position = bornObj.transform.position;
         }

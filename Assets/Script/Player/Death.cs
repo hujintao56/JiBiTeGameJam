@@ -5,9 +5,11 @@ using UnityEngine;
 public class Death : MonoBehaviour
 {
     private Absorb absorb;
+    private Player player;
     private void Start()
     {
         absorb = GetComponentInParent<Absorb>();
+        player = GetComponentInParent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,6 +17,8 @@ public class Death : MonoBehaviour
         if (collision.CompareTag("Enemy") && absorb.mouseRight != 0)
         {
             Destroy(collision.gameObject);
+            player.CurrentElement = collision.gameObject.GetComponent<Enemy>().element;
+            player.ButtonEnergy += 10; 
         }
     }
 }

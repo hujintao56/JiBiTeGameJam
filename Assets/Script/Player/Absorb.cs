@@ -9,11 +9,12 @@ public class Absorb : MonoBehaviour
     public float mouseRight ;
     private Transform target;
     public float moveSpeed = 1;
+    private bool OnTri;
 
-    void Update()
+    private void FixedUpdate()
     {
         mouseRight = Input.GetAxis("Fire1");
-        if (target != null)
+        if (target != null && OnTri)
         {
             Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
             Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
@@ -23,9 +24,10 @@ public class Absorb : MonoBehaviour
             // transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
 
             // 使用Vector2.MoveTowards进行直线移动
-            Vector2 newPosition = Vector2.MoveTowards(targetPosition, currentPosition ,moveSpeed * Time.deltaTime);
+            Vector2 newPosition = Vector2.MoveTowards(targetPosition, currentPosition, moveSpeed * Time.deltaTime);
             target.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
         }
+        OnTri = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -33,12 +35,10 @@ public class Absorb : MonoBehaviour
         if (mouseRight != 0 && collision.CompareTag("Enemy"))
         {
             target = collision.transform;
-        }
-        else
-        {
-            target = null;
+            OnTri = true;
         }
     }
 
-    
+
+
 }
