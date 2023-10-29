@@ -16,12 +16,14 @@ public class Move : MonoBehaviour
     private Collision2D cloudCol;
     [SerializeField] private AudioSource jumpSoundEffect;
     [SerializeField] private AudioSource runSoundEffect;
+    private Animator animator;
     private void Start()
     {
         //weapenObj = transform.Find("weapon");
         rb = GetComponent<Rigidbody2D>();
         plgcol = GetComponentInChildren<PolygonCollider2D>();
         player = GetComponentInParent<Player>();
+        animator = player.transform.GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -41,20 +43,36 @@ public class Move : MonoBehaviour
         else
             runSoundEffect.Pause();
 
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded )
+        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
         {
+            isGrounded = false;
             jumpSoundEffect.Play();
             isJumping = true;
             rb.AddForce(new Vector2(0f, jumpForce - rb.velocity.y), ForceMode2D.Impulse);
+            animator.SetBool("Jump", true);
+            Invoke("JumpCancel", 1f);
         }
-        if (rb.velocity.y == 0 )
+        if (rb.velocity.y == 0)
         {
             //rb.velocity = new Vector2(0,-3);
         }
     }
 
+    private void JumpCancel()
+    {
+        animator.SetBool("Jump", false);
+    }
+
     private void FixedUpdate()
     {
+        if (horizontalMovement != 0)
+        {
+            animator.SetBool("Run", true);
+        }
+        else
+        {
+            animator.SetBool("Run", false);
+        }
         rb.velocity = new Vector2(horizontalMovement * moveSpeed, rb.velocity.y);
 
         if (isJumping && rb.velocity.y < 0f)
@@ -95,9 +113,10 @@ public class Move : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        isGrounded = false;
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("cloud"))
         {
-            isGrounded = false;
+
         }
         if (collision.gameObject.CompareTag("cloud"))
         {
@@ -110,6 +129,7 @@ public class Move : MonoBehaviour
         if (collision.gameObject.CompareTag("cloud"))
         {
             cloudCol = collision;
+            isGrounded = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
