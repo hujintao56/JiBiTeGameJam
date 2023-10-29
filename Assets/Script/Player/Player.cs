@@ -20,16 +20,14 @@ public class Player : MonoBehaviour
     private GameObject bornObj;
     public int _StrongSkillEnegy = 0;
     public int ReduceEnergy = 0;
-    [HideInInspector]
     public int ButtonEnergy;
-    //[HideInInspector]
-
     public Element CurrentElement;
     private Transform weapenObj;
     private Move move;
     private FireManager firemng;
     public Camera mainCamera;
     public bool PlayerState = false;
+
     void Start()
     {
         weapenObj = transform.Find("weapon");
@@ -45,6 +43,7 @@ public class Player : MonoBehaviour
         {
             Attack(CurrentElement);
         }
+
     }
 
     private void Attack(Element element)
