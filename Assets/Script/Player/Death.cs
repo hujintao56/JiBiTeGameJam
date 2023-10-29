@@ -17,7 +17,10 @@ public class Death : MonoBehaviour
         if (collision.CompareTag("Enemy") && absorb.mouseRight != 0)
         {
             Destroy(collision.gameObject);
-            player.CurrentElement = collision.gameObject.GetComponent<Enemy>().element;
+            if (collision.gameObject.GetComponent<Enemy>().element != Element.nothing)
+            {
+                player.CurrentElement = collision.gameObject.GetComponent<Enemy>().element;
+            }
             player.ButtonEnergy += 10; 
         }
     }
