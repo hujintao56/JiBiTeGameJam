@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public enum Element
@@ -38,6 +40,11 @@ public class Player : MonoBehaviour
         firemng = FindObjectOfType<FireManager>();
         bornObj = GameObject.FindGameObjectWithTag("born");
         animator = GetComponentInChildren<Animator>();
+
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     void Update()
@@ -113,8 +120,9 @@ public class Player : MonoBehaviour
                     {
                         if (collider.CompareTag("Box"))
                         {
+                            //collider.AddComponent<Rigidbody2D>();
                             Rigidbody2D rigBox = collider.GetComponent<Rigidbody2D>();
-                            rigBox.velocity = new Vector2(move.facingDirection * 10, rigBox.velocity.y);
+                            rigBox.velocity = new Vector2(move.facingDirection * 1, rigBox.velocity.y);
                         }
                         move.WindWashself();
                     }
@@ -139,10 +147,29 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("CorpseFlower") || collision.gameObject.CompareTag("River"))
+        if (!PlayerState &&( collision.gameObject.CompareTag("Spike")  || collision.gameObject.CompareTag("CorpseFlower")
+            || collision.gameObject.CompareTag("River") || collision.gameObject.CompareTag("Fire")))
         {
             deadSoundEffect.Play();
             transform.position = bornObj.transform.position;
+        }
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            SceneManager.LoadScene("TaoTest2");
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!PlayerState && ((collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("CorpseFlower")
+            || collision.gameObject.CompareTag("River") || collision.gameObject.CompareTag("Fire"))))
+        {
+            deadSoundEffect.Play();
+            transform.position = bornObj.transform.position;
+        }
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            SceneManager.LoadScene("TaoTest2");
         }
     }
 

@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class Vine : MonoBehaviour
 {
-    // 如果isBig = true，那就不能再生长得更大了
+    // 濡傛灉isBig = true锛岄偅灏变笉鑳藉啀鐢熼暱寰楁洿澶т簡
     public bool isBig;
+    public Sprite sprite;
+    private SpriteRenderer render;
 
+    private void Start()
+    {
+        render = GetComponent<SpriteRenderer>();
+    }
     public void Growth()
     {
         if (isBig)
             return;
-
-        gameObject.transform.localScale = new Vector3(2.5f, 2.5f, 1);
+        render.sprite = sprite;
+        gameObject.transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 3, 1);
     }
 }
