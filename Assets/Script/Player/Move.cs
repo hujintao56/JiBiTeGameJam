@@ -4,6 +4,7 @@ public class Move : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
+    private Player player;
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool isJumping;
@@ -20,6 +21,7 @@ public class Move : MonoBehaviour
         //weapenObj = transform.Find("weapon");
         rb = GetComponent<Rigidbody2D>();
         plgcol = GetComponentInChildren<PolygonCollider2D>();
+        player = GetComponentInParent<Player>();
     }
 
     private void Update()
@@ -61,11 +63,14 @@ public class Move : MonoBehaviour
         }
         if (horizontalMovement > 0)
         {
+            player.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             plgcol.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
             weapenObj.rotation = Quaternion.Euler(0, 0, 0);
+
         }
         if (horizontalMovement < 0)
         {
+            player.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
             plgcol.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
             weapenObj.rotation = Quaternion.Euler(0, -180, 0);
         }
