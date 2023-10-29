@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TaoTest.unity
     guid: 3bfb8efe93c42b640a88795849f15bb1
+  - enabled: 1
+    path: Assets/Scenes/TaoTest2.unity
+    guid: c73207aed3d844047994439fb39c9239
   m_configObjects: {}

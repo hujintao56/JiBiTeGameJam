@@ -29,7 +29,6 @@ public class Weapon : MonoBehaviour
             case Element.fire:
                 if (collision.CompareTag("Vine")||collision.CompareTag("Box")||collision.CompareTag("CorpseFlower"))
                 {
-                    Debug.Log(collision);
                     Destroy(collision.gameObject);
                 }
                 break;
