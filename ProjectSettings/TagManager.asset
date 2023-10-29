@@ -8,6 +8,16 @@ TagManager:
   - cloud
   - Enemy
   - born
+  - good
+  - Vine
+  - Box
+  - Fire
+  - Rock
+  - Spike
+  - Door
+  - CorpseFlower
+  - River
+  - Wood
   layers:
   - Default
   - TransparentFX
@@ -17,8 +27,8 @@ TagManager:
   - UI
   - grass
   - obstacle
-  - 
-  - 
+  - carema
+  - player
   - 
   - 
   - 
