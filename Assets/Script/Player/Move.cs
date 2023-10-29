@@ -12,6 +12,7 @@ public class Move : MonoBehaviour
     private PolygonCollider2D plgcol;
     public Transform weapenObj;
     public int facingDirection = 1;
+    private Collision2D cloudCol;
     private void Start()
     {
         //weapenObj = transform.Find("weapon");
@@ -37,7 +38,7 @@ public class Move : MonoBehaviour
         }
         if (rb.velocity.y == 0 )
         {
-            rb.velocity = new Vector2(0,-3);
+            //rb.velocity = new Vector2(0,-3);
         }
     }
 
@@ -58,6 +59,14 @@ public class Move : MonoBehaviour
         {
             plgcol.gameObject.transform.rotation = Quaternion.Euler(0, -180, 0);
             weapenObj.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (cloudCol != null)
+            {
+                cloudCol.collider.isTrigger = true;
+                is_down = true;
+            }
         }
     }
 
@@ -84,10 +93,9 @@ public class Move : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         isGrounded = true;
-        if (Input.GetKeyDown(KeyCode.S) && collision.gameObject.CompareTag("cloud"))
+        if (collision.gameObject.CompareTag("cloud"))
         {
-            collision.collider.isTrigger = true;
-            is_down = true;
+            cloudCol = collision;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

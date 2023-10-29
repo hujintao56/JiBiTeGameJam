@@ -17,8 +17,9 @@ public class Player : MonoBehaviour
 {
     public GameObject fireballPrefab;
     public float fireballSpeed = 10f;
-
+    private GameObject bornObj;
     public int _StrongSkillEnegy = 0;
+    public int ReduceEnegy = 0;
     [HideInInspector]
     public int ButtonEnegy { get; set; }
     //[HideInInspector]
@@ -35,11 +36,12 @@ public class Player : MonoBehaviour
         CurrentElement = Element.shadow;
         move = GetComponentInChildren<Move>();
         firemng = FindObjectOfType<FireManager>();
+        bornObj = GameObject.FindGameObjectWithTag("born");
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Attack(CurrentElement);
         }
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    ButtonEnegy -= ReduceEnegy;
                     GameObject fireball = Instantiate(fireballPrefab, transform.position, Quaternion.LookRotation(transform.forward));
 
                     // 设置火球的初始速度和方向
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    ButtonEnegy -= ReduceEnegy;
                     firemng.checkAllOut();
                 }
                 break;
@@ -86,6 +90,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    ButtonEnegy -= ReduceEnegy;
                     Rect cameraView = mainCamera.rect;
 
                     // 将视口范围转换为世界坐标范围
@@ -109,7 +114,7 @@ public class Player : MonoBehaviour
                 break;
             case Element.shadow:
                     PlayerState = true;
-                Invoke("SWPlayerState", 5f);
+                    Invoke("SWPlayerState", 5f);
                 break;
             default:
                 break;
@@ -122,6 +127,14 @@ public class Player : MonoBehaviour
     private void SWPlayerState()
     {
         PlayerState = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
+            transform.position = bornObj.transform.position;
+        }
     }
 
 

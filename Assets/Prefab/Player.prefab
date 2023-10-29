@@ -149,7 +149,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   jumpForce: 7
-  spped: {x: 0, y: 0}
+  weapenObj: {fileID: 0}
+  facingDirection: 1
 --- !u!1 &211572808307738871
 GameObject:
   m_ObjectHideFlags: 0

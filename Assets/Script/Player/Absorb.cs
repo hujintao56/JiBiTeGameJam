@@ -12,7 +12,7 @@ public class Absorb : MonoBehaviour
 
     void Update()
     {
-        mouseRight = Input.GetAxis("Fire2");
+        mouseRight = Input.GetAxis("Fire1");
         if (target != null)
         {
             Vector2 targetPosition = new Vector2(target.position.x, target.position.y);
